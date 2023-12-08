@@ -10,8 +10,8 @@ from libs.passport import PassportService
 
 class PassportResource(Resource):
     """Base resource for passport."""
-    def get(self):
-        app_code = request.headers.get('X-App-Code')
+    def post(self):
+        app_code = 'Gqufcc55PxK7b8Yb'
         if app_code is None:
             raise Unauthorized('X-App-Code header is missing.')
 
@@ -32,7 +32,7 @@ class PassportResource(Resource):
             app_id=app_model.id,
             type='browser',
             is_anonymous=True,
-            session_id=generate_session_id(),
+            session_id='wetwang',
         )
         db.session.add(end_user)
         db.session.commit()
@@ -49,6 +49,7 @@ class PassportResource(Resource):
 
         return {
             'access_token': tk,
+            'test': 'xxxxx',
         }
 
 api.add_resource(PassportResource, '/passport')

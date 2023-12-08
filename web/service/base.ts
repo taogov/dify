@@ -173,16 +173,8 @@ const baseFetch = <T>(
 ): Promise<T> => {
   const options: typeof baseOptions & FetchOptionType = Object.assign({}, baseOptions, fetchOptions)
   if (isPublicAPI) {
-    const sharedToken = globalThis.location.pathname.split('/').slice(-1)[0]
-    const accessToken = localStorage.getItem('token') || JSON.stringify({ [sharedToken]: '' })
-    let accessTokenJson = { [sharedToken]: '' }
-    try {
-      accessTokenJson = JSON.parse(accessToken)
-    }
-    catch (e) {
-
-    }
-    options.headers.set('Authorization', `Bearer ${accessTokenJson[sharedToken]}`)
+    const accessToken = localStorage.getItem('token') || ''
+    options.headers.set('Authorization', `Bearer ${accessToken}`)
   }
   else {
     const accessToken = localStorage.getItem('console_token') || ''
