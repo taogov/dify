@@ -27,6 +27,7 @@ DEFAULTS = {
     'SERVICE_API_URL': 'https://api.dify.ai',
     'APP_WEB_URL': 'https://udify.app',
     'APP_API_URL': 'https://udify.app',
+    'BACKEND_API_URL': 'https://udify.app',
     'FILES_URL': '',
     'STORAGE_TYPE': 'local',
     'STORAGE_LOCAL_PATH': 'storage',
@@ -109,6 +110,7 @@ class Config:
         # WebApp API backend Url prefix.
         # used to declare the back-end URL for the front-end API.
         self.APP_API_URL = get_env('APP_URL') if get_env('APP_URL') else get_env('APP_API_URL')
+        self.BACKEND_API_URL = get_env('BACKEND_API_URL') if get_env('BACKEND_API_URL') else get_env('BACKEND_API_URL')
 
         # WebApp Url prefix.
         # used to display WebAPP API Base Url to the front-end.

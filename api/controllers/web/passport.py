@@ -1,23 +1,36 @@
 # -*- coding:utf-8 -*-
 import uuid
 from controllers.web import api
-from flask_restful import Resource
-from flask import request
+from flask import request, current_app
+from flask_restful import Resource, reqparse
 from werkzeug.exceptions import Unauthorized, NotFound
 from models.model import Site, EndUser, App
 from extensions.ext_database import db
 from libs.passport import PassportService
+import requests
+import json
 
 class PassportResource(Resource):
     """Base resource for passport."""
     def post(self):
-        app_code = 'Gqufcc55PxK7b8Yb'
-        if app_code is None:
-            raise Unauthorized('X-App-Code header is missing.')
-
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', type=str, required=True, nullable=False, location='json')
+        parser.add_argument('password', type=str, required=True, nullable=False, location='json')
+        args = parser.parse_args()
+        url = current_app.config.get('BACKEND_API_URL') + '/system/login'
+        headers = {'content-type': "application/json"}
+        body = {"username":args['username'], "password":args['password']}
+        response = requests.post(url, data = json.dumps(body), headers = headers)
+        if response.status_code == 200:
+            data = json.loads(response.text)
+            if(data["code"] != 200):
+                raise Unauthorized(data["message"])
+        else:
+            raise Unauthorized('登录错误')
+        app_id = data['data']['app_id']
         # get site from db and check if it is normal
         site = db.session.query(Site).filter(
-            Site.code == app_code,
+            Site.app_id == app_id,
             Site.status == 'normal'
         ).first()
         if not site:
@@ -32,7 +45,7 @@ class PassportResource(Resource):
             app_id=app_model.id,
             type='browser',
             is_anonymous=True,
-            session_id='wetwang',
+            session_id=args['username'],
         )
         db.session.add(end_user)
         db.session.commit()
@@ -41,7 +54,7 @@ class PassportResource(Resource):
             "iss": site.app_id,
             'sub': 'Web API Passport',
             'app_id': site.app_id,
-            'app_code': app_code,
+            'app_code': site.code,
             'end_user_id': end_user.id,
         }
 
