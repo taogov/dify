@@ -8,6 +8,7 @@ services:
       MODE: api
       LOG_LEVEL: INFO
       SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      MIGRATION_ENABLED: 'true'
     depends_on:
       - db
       - redis
