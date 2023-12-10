@@ -15,6 +15,7 @@ const LoginPage: React.FC = () => {
     })
     if (result.access_token !== undefined) {
       localStorage.setItem('token', result.access_token)
+      localStorage.setItem('username', username)
       window.location.href = '/chat'
     }
   }

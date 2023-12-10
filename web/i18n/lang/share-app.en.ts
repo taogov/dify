@@ -6,6 +6,7 @@ const translation = {
   },
   chat: {
     newChat: 'New chat',
+    logout: 'Logout',
     pinnedTitle: 'Pinned',
     unpinnedTitle: 'Chats',
     newChatDefaultName: 'New conversation',

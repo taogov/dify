@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 'use client'
-import type { FC } from 'react'
-import React, { useEffect, useRef, useState } from 'react'
+import type {FC} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import cn from 'classnames'
 import useSWR from 'swr'
-import { useTranslation } from 'react-i18next'
-import { useContext } from 'use-context-selector'
+import {useTranslation} from 'react-i18next'
+import {useContext} from 'use-context-selector'
 import produce from 'immer'
-import { useBoolean, useGetState } from 'ahooks'
+import {useBoolean, useGetState} from 'ahooks'
 import AppUnavailable from '../../base/app-unavailable'
-import { checkOrSetAccessToken } from '../utils'
+import {checkOrSetAccessToken} from '../utils'
 import useConversation from './hooks/use-conversation'
-import { ToastContext } from '@/app/components/base/toast'
+import {ToastContext} from '@/app/components/base/toast'
 import Sidebar from '@/app/components/share/chat/sidebar'
 import ConfigSence from '@/app/components/share/chat/config-scence'
 import Header from '@/app/components/share/header'
@@ -29,20 +29,20 @@ import {
   unpinConversation,
   updateFeedback,
 } from '@/service/share'
-import type { ConversationItem, SiteInfo } from '@/models/share'
-import type { PromptConfig, SuggestedQuestionsAfterAnswerConfig } from '@/models/debug'
-import type { Feedbacktype, IChatItem } from '@/app/components/app/chat/type'
+import type {ConversationItem, SiteInfo} from '@/models/share'
+import type {PromptConfig, SuggestedQuestionsAfterAnswerConfig} from '@/models/debug'
+import type {Feedbacktype, IChatItem} from '@/app/components/app/chat/type'
 import Chat from '@/app/components/app/chat'
-import { changeLanguage } from '@/i18n/i18next-config'
-import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
+import {changeLanguage} from '@/i18n/i18next-config'
+import useBreakpoints, {MediaType} from '@/hooks/use-breakpoints'
 import Loading from '@/app/components/base/loading'
-import { replaceStringWithValues } from '@/app/components/app/configuration/prompt-value-panel'
-import { userInputsFormToPromptVariables } from '@/utils/model-config'
-import type { InstalledApp } from '@/models/explore'
+import {replaceStringWithValues} from '@/app/components/app/configuration/prompt-value-panel'
+import {userInputsFormToPromptVariables} from '@/utils/model-config'
+import type {InstalledApp} from '@/models/explore'
 import Confirm from '@/app/components/base/confirm'
-import type { VisionFile, VisionSettings } from '@/types/app'
-import { Resolution, TransferMethod } from '@/types/app'
-import { fetchFileUploadConfig } from '@/service/common'
+import type {VisionFile, VisionSettings} from '@/types/app'
+import {Resolution, TransferMethod} from '@/types/app'
+import {fetchFileUploadConfig} from '@/service/common'
 
 export type IMainProps = {
   isInstalledApp?: boolean
@@ -52,10 +52,10 @@ export type IMainProps = {
 }
 
 const Main: FC<IMainProps> = ({
-  isInstalledApp = false,
-  installedAppInfo,
-}) => {
-  const { t } = useTranslation()
+                                isInstalledApp = false,
+                                installedAppInfo,
+                              }) => {
+  const {t} = useTranslation()
   const media = useBreakpoints()
   const isMobile = media === MediaType.mobile
 
@@ -71,14 +71,14 @@ const Main: FC<IMainProps> = ({
   const [inited, setInited] = useState<boolean>(false)
   const [plan, setPlan] = useState<string>('basic') // basic/plus/pro
   // in mobile, show sidebar by click button
-  const [isShowSidebar, { setTrue: showSidebar, setFalse: hideSidebar }] = useBoolean(false)
+  const [isShowSidebar, {setTrue: showSidebar, setFalse: hideSidebar}] = useBoolean(false)
   // Can Use metadata(https://beta.nextjs.org/docs/api-reference/metadata) to set title. But it only works in server side client.
   useEffect(() => {
     if (siteInfo?.title) {
       if (plan !== 'basic')
         document.title = `${siteInfo.title}`
       else
-        document.title = `${siteInfo.title} - Powered by Dify`
+        document.title = `${siteInfo.title} - Powered by GotoAi`
     }
   }, [siteInfo?.title, plan])
 
@@ -86,8 +86,14 @@ const Main: FC<IMainProps> = ({
   * conversation info
   */
   const [allConversationList, setAllConversationList] = useState<ConversationItem[]>([])
-  const [isClearConversationList, { setTrue: clearConversationListTrue, setFalse: clearConversationListFalse }] = useBoolean(false)
-  const [isClearPinnedConversationList, { setTrue: clearPinnedConversationListTrue, setFalse: clearPinnedConversationListFalse }] = useBoolean(false)
+  const [isClearConversationList, {
+    setTrue: clearConversationListTrue,
+    setFalse: clearConversationListFalse
+  }] = useBoolean(false)
+  const [isClearPinnedConversationList, {
+    setTrue: clearPinnedConversationListTrue,
+    setFalse: clearPinnedConversationListFalse
+  }] = useBoolean(false)
   const {
     conversationList,
     setConversationList,
@@ -110,23 +116,21 @@ const Main: FC<IMainProps> = ({
   } = useConversation()
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [hasPinnedMore, setHasPinnedMore] = useState<boolean>(true)
-  const onMoreLoaded = ({ data: conversations, has_more }: any) => {
+  const onMoreLoaded = ({data: conversations, has_more}: any) => {
     setHasMore(has_more)
     if (isClearConversationList) {
       setConversationList(conversations)
       clearConversationListFalse()
-    }
-    else {
+    } else {
       setConversationList([...conversationList, ...conversations])
     }
   }
-  const onPinnedMoreLoaded = ({ data: conversations, has_more }: any) => {
+  const onPinnedMoreLoaded = ({data: conversations, has_more}: any) => {
     setHasPinnedMore(has_more)
     if (isClearPinnedConversationList) {
       setPinnedConversationList(conversations)
       clearPinnedConversationListFalse()
-    }
-    else {
+    } else {
       setPinnedConversationList([...pinnedConversationList, ...conversations])
     }
   }
@@ -142,16 +146,16 @@ const Main: FC<IMainProps> = ({
   }
   const handlePin = async (id: string) => {
     await pinConversation(isInstalledApp, installedAppInfo?.id, id)
-    notify({ type: 'success', message: t('common.api.success') })
+    notify({type: 'success', message: t('common.api.success')})
     noticeUpdateList()
   }
 
   const handleUnpin = async (id: string) => {
     await unpinConversation(isInstalledApp, installedAppInfo?.id, id)
-    notify({ type: 'success', message: t('common.api.success') })
+    notify({type: 'success', message: t('common.api.success')})
     noticeUpdateList()
   }
-  const [isShowConfirm, { setTrue: showConfirm, setFalse: hideConfirm }] = useBoolean(false)
+  const [isShowConfirm, {setTrue: showConfirm, setFalse: hideConfirm}] = useBoolean(false)
   const [toDeleteConversationId, setToDeleteConversationId] = useState('')
   const handleDelete = (id: string) => {
     setToDeleteConversationId(id)
@@ -161,7 +165,7 @@ const Main: FC<IMainProps> = ({
 
   const didDelete = async () => {
     await delConversation(isInstalledApp, installedAppInfo?.id, toDeleteConversationId)
-    notify({ type: 'success', message: t('common.api.success') })
+    notify({type: 'success', message: t('common.api.success')})
     hideConfirm()
     if (currConversationId === toDeleteConversationId)
       handleConversationIdChange('-1')
@@ -174,7 +178,7 @@ const Main: FC<IMainProps> = ({
   const [citationConfig, setCitationConfig] = useState<SuggestedQuestionsAfterAnswerConfig | null>(null)
 
   const [conversationIdChangeBecauseOfNew, setConversationIdChangeBecauseOfNew, getConversationIdChangeBecauseOfNew] = useGetState(false)
-  const [isChatStarted, { setTrue: setChatStarted, setFalse: setChatNotStarted }] = useBoolean(false)
+  const [isChatStarted, {setTrue: setChatStarted, setFalse: setChatNotStarted}] = useBoolean(false)
   const handleStartChat = (inputs: Record<string, any>) => {
     createNewChat()
     setConversationIdChangeBecauseOfNew(true)
@@ -197,7 +201,10 @@ const Main: FC<IMainProps> = ({
   useEffect(() => {
     (async () => {
       if (controlChatUpdateAllConversation && !isNewConversation) {
-        const { data: allConversations } = await fetchAllConversations() as { data: ConversationItem[]; has_more: boolean }
+        const {data: allConversations} = await fetchAllConversations() as {
+          data: ConversationItem[];
+          has_more: boolean
+        }
         const item = allConversations.find(item => item.id === currConversationId)
         setAllConversationList(allConversations)
         if (item) {
@@ -231,8 +238,7 @@ const Main: FC<IMainProps> = ({
         name: item?.name || '',
         introduction: notSyncToStateIntroduction,
       })
-    }
-    else {
+    } else {
       notSyncToStateInputs = newConversationInputs
       setCurrInputs(notSyncToStateInputs)
     }
@@ -240,7 +246,7 @@ const Main: FC<IMainProps> = ({
     // update chat list of current conversation
     if (!isNewConversation && !conversationIdChangeBecauseOfNew) {
       fetchChatList(currConversationId, isInstalledApp, installedAppInfo?.id).then((res: any) => {
-        const { data } = res
+        const {data} = res
         const newChatList: IChatItem[] = generateNewChatListWithOpenstatement(notSyncToStateIntroduction, notSyncToStateInputs)
 
         data.forEach((item: any) => {
@@ -273,8 +279,7 @@ const Main: FC<IMainProps> = ({
     if (id === '-1') {
       createNewChat()
       setConversationIdChangeBecauseOfNew(true)
-    }
-    else {
+    } else {
       setConversationIdChangeBecauseOfNew(false)
     }
     // trigger handleConversationSwitch
@@ -356,26 +361,34 @@ const Main: FC<IMainProps> = ({
       : fetchAppInfo(), fetchAllConversations(), fetchAppParams(isInstalledApp, installedAppInfo?.id)])
   }
 
-  const { data: fileUploadConfigResponse } = useSWR(isInstalledApp ? { url: '/files/upload' } : null, fetchFileUploadConfig)
+  const {data: fileUploadConfigResponse} = useSWR(isInstalledApp ? {url: '/files/upload'} : null, fetchFileUploadConfig)
 
   // init
   useEffect(() => {
     (async () => {
       try {
         const [appData, conversationData, appParams]: any = await fetchInitData()
-        const { app_id: appId, site: siteInfo, plan }: any = appData
+        const {app_id: appId, site: siteInfo, plan}: any = appData
         setAppId(appId)
         setPlan(plan)
         const tempIsPublicVersion = siteInfo.prompt_public
         setIsPublicVersion(tempIsPublicVersion)
         const prompt_template = ''
         // handle current conversation id
-        const { data: allConversations } = conversationData as { data: ConversationItem[]; has_more: boolean }
+        const {data: allConversations} = conversationData as { data: ConversationItem[]; has_more: boolean }
         const _conversationId = getConversationIdFromStorage(appId)
         const isNotNewConversation = allConversations.some(item => item.id === _conversationId)
         setAllConversationList(allConversations)
         // fetch new conversation info
-        const { user_input_form, opening_statement: introduction, suggested_questions_after_answer, speech_to_text, retriever_resource, file_upload, sensitive_word_avoidance }: any = appParams
+        const {
+          user_input_form,
+          opening_statement: introduction,
+          suggested_questions_after_answer,
+          speech_to_text,
+          retriever_resource,
+          file_upload,
+          sensitive_word_avoidance
+        }: any = appParams
         setVisionConfig({
           ...file_upload.image,
           image_file_size_limit: appParams?.system_parameters?.image_file_size_limit,
@@ -403,12 +416,13 @@ const Main: FC<IMainProps> = ({
           setCurrConversationId(_conversationId, appId, false)
 
         setInited(true)
-      }
-      catch (e: any) {
-        if (e.status === 404) {
+      } catch (e: any) {
+        if (e.status === 401) {
           setAppUnavailable(true)
-        }
-        else {
+          window.location.href = '/chat/login'
+        } else if (e.status === 404) {
+          setAppUnavailable(true)
+        } else {
           setIsUnknwonReason(true)
           setAppUnavailable(true)
         }
@@ -416,11 +430,11 @@ const Main: FC<IMainProps> = ({
     })()
   }, [])
 
-  const [isResponsing, { setTrue: setResponsingTrue, setFalse: setResponsingFalse }] = useBoolean(false)
+  const [isResponsing, {setTrue: setResponsingTrue, setFalse: setResponsingFalse}] = useBoolean(false)
   const [abortController, setAbortController] = useState<AbortController | null>(null)
-  const { notify } = useContext(ToastContext)
+  const {notify} = useContext(ToastContext)
   const logError = (message: string) => {
-    notify({ type: 'error', message })
+    notify({type: 'error', message})
   }
 
   const checkCanSend = () => {
@@ -433,11 +447,11 @@ const Main: FC<IMainProps> = ({
       return true
 
     let hasEmptyInput = ''
-    const requiredVars = prompt_variables?.filter(({ key, name, required }) => {
+    const requiredVars = prompt_variables?.filter(({key, name, required}) => {
       const res = (!key || !key.trim()) || (!name || !name.trim()) || (required || required === undefined || required === null)
       return res
     }) || [] // compatible with old version
-    requiredVars.forEach(({ key, name }) => {
+    requiredVars.forEach(({key, name}) => {
       if (hasEmptyInput)
         return
 
@@ -446,7 +460,7 @@ const Main: FC<IMainProps> = ({
     })
 
     if (hasEmptyInput) {
-      logError(t('appDebug.errorMessage.valueOfVarRequired', { key: hasEmptyInput }))
+      logError(t('appDebug.errorMessage.valueOfVarRequired', {key: hasEmptyInput}))
       return false
     }
     return !hasEmptyInput
@@ -467,12 +481,12 @@ const Main: FC<IMainProps> = ({
   })
   const handleSend = async (message: string, files?: VisionFile[]) => {
     if (isResponsing) {
-      notify({ type: 'info', message: t('appDebug.errorMessage.waitForResponse') })
+      notify({type: 'info', message: t('appDebug.errorMessage.waitForResponse')})
       return
     }
 
     if (files?.find(item => item.transfer_method === TransferMethod.local_file && !item.upload_file_id)) {
-      notify({ type: 'info', message: t('appDebug.errorMessage.waitForImgUpload') })
+      notify({type: 'info', message: t('appDebug.errorMessage.waitForImgUpload')})
       return false
     }
 
@@ -530,7 +544,11 @@ const Main: FC<IMainProps> = ({
       getAbortController: (abortController) => {
         setAbortController(abortController)
       },
-      onData: (message: string, isFirstMessage: boolean, { conversationId: newConversationId, messageId, taskId }: any) => {
+      onData: (message: string, isFirstMessage: boolean, {
+        conversationId: newConversationId,
+        messageId,
+        taskId
+      }: any) => {
         responseItem.content = responseItem.content + message
         responseItem.id = messageId
         if (isFirstMessage && newConversationId)
@@ -547,9 +565,9 @@ const Main: FC<IMainProps> = ({
           getChatList().filter(item => item.id !== responseItem.id && item.id !== placeholderAnswerId),
           (draft) => {
             if (!draft.find(item => item.id === questionId))
-              draft.push({ ...questionItem })
+              draft.push({...questionItem})
 
-            draft.push({ ...responseItem })
+            draft.push({...responseItem})
           })
         setChatList(newListWithAnswer)
       },
@@ -558,7 +576,7 @@ const Main: FC<IMainProps> = ({
           return
 
         if (getConversationIdChangeBecauseOfNew()) {
-          const { data: allConversations }: any = await fetchAllConversations()
+          const {data: allConversations}: any = await fetchAllConversations()
           const newItem: any = await generationConversationName(isInstalledApp, installedAppInfo?.id, allConversations[0].id)
 
           const newAllConversations = produce(allConversations, (draft: any) => {
@@ -572,7 +590,7 @@ const Main: FC<IMainProps> = ({
         setChatNotStarted()
         setCurrConversationId(tempNewConversationId, appId, true)
         if (getIsResponsingConIsCurrCon() && suggestedQuestionsAfterAnswerConfig?.enabled && !getHasStopResponded()) {
-          const { data }: any = await fetchSuggestedQuestions(responseItem.id, isInstalledApp, installedAppInfo?.id)
+          const {data}: any = await fetchSuggestedQuestions(responseItem.id, isInstalledApp, installedAppInfo?.id)
           setSuggestQuestions(data)
           setIsShowSuggestion(true)
         }
@@ -588,9 +606,9 @@ const Main: FC<IMainProps> = ({
             getChatList().filter(item => item.id !== responseItem.id && item.id !== placeholderAnswerId),
             (draft) => {
               if (!draft.find(item => item.id === questionId))
-                draft.push({ ...questionItem })
+                draft.push({...questionItem})
 
-              draft.push({ ...responseItem })
+              draft.push({...responseItem})
             })
           setChatList(newListWithAnswer)
         }
@@ -598,8 +616,7 @@ const Main: FC<IMainProps> = ({
       onMessageReplace: (messageReplace) => {
         if (isInstalledApp) {
           responseItem.content = messageReplace.answer
-        }
-        else {
+        } else {
           setChatList(produce(
             getChatList(),
             (draft) => {
@@ -622,7 +639,10 @@ const Main: FC<IMainProps> = ({
   }
 
   const handleFeedback = async (messageId: string, feedback: Feedbacktype) => {
-    await updateFeedback({ url: `/messages/${messageId}/feedbacks`, body: { rating: feedback.rating } }, isInstalledApp, installedAppInfo?.id)
+    await updateFeedback({
+      url: `/messages/${messageId}/feedbacks`,
+      body: {rating: feedback.rating}
+    }, isInstalledApp, installedAppInfo?.id)
     const newChatList = chatList.map((item) => {
       if (item.id === messageId) {
         return {
@@ -633,7 +653,7 @@ const Main: FC<IMainProps> = ({
       return item
     })
     setChatList(newChatList)
-    notify({ type: 'success', message: t('common.api.success') })
+    notify({type: 'success', message: t('common.api.success')})
   }
 
   const renderSidebar = () => {
@@ -673,11 +693,11 @@ const Main: FC<IMainProps> = ({
   }
 
   if (appUnavailable)
-    return <AppUnavailable isUnknwonReason={isUnknwonReason} />
+    return <AppUnavailable isUnknwonReason={isUnknwonReason}/>
 
   if (!appId || !siteInfo || !promptConfig) {
     return <div className='flex h-screen w-full'>
-      <Loading type='app' />
+      <Loading type='app'/>
     </div>
   }
 
@@ -709,8 +729,8 @@ const Main: FC<IMainProps> = ({
         {!isMobile && renderSidebar()}
         {isMobile && isShowSidebar && (
           <div className='fixed inset-0 z-50'
-            style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }}
-            onClick={hideSidebar}
+               style={{backgroundColor: 'rgba(35, 56, 118, 0.2)'}}
+               onClick={hideSidebar}
           >
             <div className='inline-block' onClick={e => e.stopPropagation()}>
               {renderSidebar()}
@@ -737,7 +757,8 @@ const Main: FC<IMainProps> = ({
 
           {
             hasSetInputs && (
-              <div className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full mx-auto mb-3.5 overflow-hidden')}>
+              <div
+                className={cn(doShowSuggestion ? 'pb-[140px]' : (isResponsing ? 'pb-[113px]' : 'pb-[76px]'), 'relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full mx-auto mb-3.5 overflow-hidden')}>
                 <div className='h-full overflow-y-auto' ref={chatListDomRef}>
                   <Chat
                     chatList={chatList}
