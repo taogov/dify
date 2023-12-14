@@ -23,12 +23,12 @@ const config: ProviderConfig = {
       },
       link: {
         href: {
-          'en': 'https://docs.dify.ai/getting-started/install-self-hosted',
-          'zh-Hans': 'https://docs.dify.ai/v/zh-hans/getting-started/install-self-hosted',
+          'en': 'https://www.gotoai.world/',
+          'zh-Hans': 'https://www.gotoai.world/',
         },
         label: {
-          'en': 'community open-source version',
-          'zh-Hans': '社区开源版本',
+          'en': 'community version',
+          'zh-Hans': '社区版本',
         },
       },
     },

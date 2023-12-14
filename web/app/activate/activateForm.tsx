@@ -208,7 +208,7 @@ const ActivateForm = () => {
                 <Link
                   className='text-primary-600'
                   target={'_blank'}
-                  href={`https://docs.dify.ai/${locale === 'en' ? '' : `v/${locale.toLowerCase()}`}/community/open-source`}
+                  href={`https://www.gotoai.world/h-col-128.html${locale === 'en' ? '' : `v/${locale.toLowerCase()}`}/community/open-source`}
                 >{t('login.license.link')}</Link>
               </div>
             </div>

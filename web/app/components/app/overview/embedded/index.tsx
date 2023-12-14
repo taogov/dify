@@ -45,9 +45,9 @@ const OPTION_MAP = {
  defer>
 </script>`,
   },
-  chromePlugin: {
-    getContent: (url: string, token: string) => `ChatBot URL: ${url}/chatbot/${token}`,
-  },
+  // chromePlugin: {
+  //   getContent: (url: string, token: string) => `ChatBot URL: ${url}/chatbot/${token}`,
+  // },
 }
 const prefixEmbedded = 'appOverview.overview.appInfo.embedded'
 
@@ -67,14 +67,7 @@ const Embedded = ({ isShow, onClose, appBaseUrl, accessToken }: Props) => {
   const { langeniusVersionInfo } = useAppContext()
   const isTestEnv = langeniusVersionInfo.current_env === 'TESTING' || langeniusVersionInfo.current_env === 'DEVELOPMENT'
   const onClickCopy = () => {
-    if (option === 'chromePlugin') {
-      const splitUrl = OPTION_MAP[option].getContent(appBaseUrl, accessToken).split(': ')
-      if (splitUrl.length > 1)
-        copy(splitUrl[1])
-    }
-    else {
       copy(OPTION_MAP[option].getContent(appBaseUrl, accessToken, isTestEnv))
-    }
     setIsCopied({ ...isCopied, [option]: true })
   }
 
@@ -124,15 +117,6 @@ const Embedded = ({ isShow, onClose, appBaseUrl, accessToken }: Props) => {
           )
         })}
       </div>
-      {option === 'chromePlugin' && (
-        <div className="mt-6 w-full">
-          <div className={cn('gap-2 py-3 justify-center items-center inline-flex w-full rounded-lg',
-            'bg-primary-600 hover:bg-primary-600/75 hover:shadow-md cursor-pointer text-white hover:shadow-sm flex-shrink-0')}>
-            <div className={`w-4 h-4 relative ${style.pluginInstallIcon}`}></div>
-            <div className="text-white text-sm font-medium font-['Inter'] leading-tight" onClick={navigateToChromeUrl}>{t(`${prefixEmbedded}.chromePlugin`)}</div>
-          </div>
-        </div>
-      )}
       <div className={cn('w-full bg-gray-100 rounded-lg flex-col justify-start items-start inline-flex',
         'mt-6')}>
         <div className="self-stretch pl-3 pr-1 py-1 bg-gray-50 rounded-tl-lg rounded-tr-lg border border-black border-opacity-5 justify-start items-center gap-2 inline-flex">

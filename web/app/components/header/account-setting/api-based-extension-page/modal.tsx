@@ -104,7 +104,6 @@ const ApiBasedExtensionModal: FC<ApiBasedExtensionModalProps> = ({
             target='_blank'
             className='group flex items-center text-xs text-gray-500 font-normal hover:text-primary-600'
           >
-            <BookOpen01 className='mr-1 w-3 h-3 text-gray-500 group-hover:text-primary-600' />
             {t('common.apiBasedExtension.link')}
           </a>
         </div>

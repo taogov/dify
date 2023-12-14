@@ -42,16 +42,6 @@ export default function AccountAbout({
           <div className='mb-3 text-center text-xs font-normal text-gray-500'>Version {langeniusVersionInfo?.current_version}</div>
           <div className='mb-4 text-center text-xs font-normal text-gray-700'>
             <div>© 2023 LangGenius, Inc., Contributors.</div>
-            <div className='text-[#1C64F2]'>
-              {
-                IS_CE_EDITION
-                  ? <Link href={'https://github.com/langgenius/dify/blob/main/LICENSE'} target='_blank'>Open Source License</Link>
-                  : <>
-                    <Link href={locale === 'en' ? 'https://docs.dify.ai/user-agreement/privacy-policy' : 'https://docs.dify.ai/v/zh-hans/yong-hu-xie-yi/yin-si-xie-yi'} target='_blank'>Privacy Policy</Link>,
-                    <Link href={locale === 'en' ? 'https://docs.dify.ai/user-agreement/terms-of-service' : 'https://docs.dify.ai/v/zh-hans/yong-hu-xie-yi/fu-wu-xie-yi'} target='_blank'>Terms of Service</Link>
-                  </>
-              }
-            </div>
           </div>
         </div>
         <div className='mb-4 -mx-8 h-[0.5px] bg-gray-200' />
@@ -64,24 +54,6 @@ export default function AccountAbout({
             }
           </div>
           <div className='flex items-center'>
-            <Link
-              className={classNames(buttonClassName, 'mr-2')}
-              href={'https://github.com/langgenius/dify/releases'}
-              target='_blank'
-            >
-              {t('common.about.changeLog')}
-            </Link>
-            {
-              !isLatest && !IS_CE_EDITION && (
-                <Link
-                  className={classNames(buttonClassName, 'text-primary-600')}
-                  href={langeniusVersionInfo.release_notes}
-                  target='_blank'
-                >
-                  {t('common.about.updateNow')}
-                </Link>
-              )
-            }
           </div>
         </div>
       </div>

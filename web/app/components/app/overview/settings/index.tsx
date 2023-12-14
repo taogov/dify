@@ -148,10 +148,6 @@ const SettingsModal: FC<ISettingsModalProps> = ({
           />
           <div className={`mt-8 font-medium ${s.settingTitle} text-gray-900`}>{t(`${prefixSettings}.more.privacyPolicy`)}</div>
           <p className={`mt-1 ${s.settingsTip} text-gray-500`}>
-            <Trans
-              i18nKey={`${prefixSettings}.more.privacyPolicyTip`}
-              components={{ privacyPolicyLink: <Link href={'https://langgenius.ai/privacy-policy'} target='_blank' className='text-primary-600' /> }}
-            />
           </p>
           <input className={`w-full mt-2 rounded-lg h-10 box-border px-3 ${s.projectName} bg-gray-100`}
             value={inputInfo.privacyPolicy}
