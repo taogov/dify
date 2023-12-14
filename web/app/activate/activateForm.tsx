@@ -109,9 +109,9 @@ const ActivateForm = () => {
             <h2 className="text-[32px] font-bold text-gray-900">{t('login.invalid')}</h2>
           </div>
           <div className="w-full mx-auto mt-6">
-            <Button type='primary' className='w-full !fone-medium !text-sm'>
-              <a href="https://dify.ai">{t('login.explore')}</a>
-            </Button>
+            {/*<Button type='primary' className='w-full !fone-medium !text-sm'>*/}
+            {/*  <a href="https://dify.ai">{t('login.explore')}</a>*/}
+            {/*</Button>*/}
           </div>
         </div>
       )}
