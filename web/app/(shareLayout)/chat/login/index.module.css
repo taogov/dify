@@ -1,0 +1,197 @@
+.backgroundBox {
+    width: 100%;
+    height: 100%;
+    min-width: 1288px;
+    min-height: 888px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    background-color: #cccc;
+}
+
+.backgroundImage {
+    background-image: url("../../../../assets/bk.png");
+    position: fixed;
+    right: 0;
+    width: 60%;
+    height:100%;
+    z-index:1;
+    background-size: cover;
+}
+
+.loginBox {
+    width:50vw;
+    height:35vw;
+    min-width: 800px;
+    min-height: 600px;
+    position: relative;
+    top:16%;
+    left: 10%;
+    bottom: 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.loginBox .pcScreen {
+    height: 60vh !important;
+    min-height: 320px;
+    min-width: 320px;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    display: initial;
+}
+
+.logo {
+    width:20px;
+    height:10px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 2%;
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.messgae {
+    width: 50%;
+    font-size: 12px;
+    padding-right: 5px;
+    border-right: 1px solid black;
+}
+
+.chatCode {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
+    background-size: 100% 100%;
+    background-image: url("../../../../assets/WeChatQRCode.jpg");
+}
+
+.linkInfo {
+    flex: 1;
+    font-size: 12px;
+}
+.link {
+    color:rgb(0, 72, 255);
+    margin: 0 5px;
+}
+
+.topInfo {
+    position: absolute;
+    left: 5%;
+    top: 25px;
+}
+
+.topInfo .logo {
+  width: 128px;
+  height: 60px;
+  background-image: url("../../../../assets/logo.png");
+  background-size: 100% 100%;
+}
+
+.topInfo .title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.topInfo .textInfo {
+    font-size:14px;
+}
+
+.copyRight {
+    position: fixed;
+    width: 500px;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    opacity: 0.3;
+}
+
+
+.moibleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+.moibleLogo {
+    width: 128px;
+    height: 60px;
+    background-image: url("../../../../assets/logo.png");
+    background-size: 100% 100%;
+    margin-top: 70px;
+}
+
+.moibleBox .pcScreen {
+    height: initial !important;
+  
+}
+
+.moibleBox .pcScreen .shadowMoible {
+    box-shadow: initial !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+      width: 60%;
+    }
+   }
+
+.moibleFooter {
+    display: flex;
+    flex-direction: column;
+}
+
+.footerOneMoible {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: ; */
+    padding: 0 5%;
+    margin-top: 5%;
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+}
+
+.moibleBox .chatCode {
+    width: 60px;
+    height: 60px;
+    background-size: 100% 100%;
+    margin: initial;
+    margin-right: 10px;
+    background-image: url("../../../../assets/WeChatQRCode.jpg");
+}
+
+.linkInfoMoible {
+    flex: 1;
+    align-self:flex-start;
+    margin-top: 2px;
+}
+
+.messgaeMoible {
+    padding: 0 5%;
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+    margin-top: 20px;
+}
+
+.copyRightMoible {
+    padding: 0 5%;
+    position: fixed;
+    font-size: 10px;
+    text-align: center;
+    color: rgba(0,0,0,0.3);
+    bottom: 1%;
+}
+
+.moibleBox .userLogin {
+    display: none;
+}
