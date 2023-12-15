@@ -276,21 +276,21 @@ const NormalForm = () => {
             </>
           }
           {/*  agree to our Terms and Privacy Policy. */}
-          <div className="w-hull text-center block mt-2 text-xs text-gray-600">
-            {t('login.tosDesc')}
-            &nbsp;
-            <Link
-              className='text-primary-600'
-              target={'_blank'}
-              href={locale === 'en' ? 'https://www.gotoai.world/' : 'https://www.gotoai.world/'}
-            >{t('login.tos')}</Link>
-            &nbsp;&&nbsp;
-            <Link
-              className='text-primary-600'
-              target={'_blank'}
-              href={locale === 'en' ? 'https://www.gotoai.world/' : 'https://www.gotoai.world/'}
-            >{t('login.pp')}</Link>
-          </div>
+          {/*<div className="w-hull text-center block mt-2 text-xs text-gray-600">*/}
+          {/*  {t('login.tosDesc')}*/}
+          {/*  &nbsp;*/}
+          {/*  <Link*/}
+          {/*    className='text-primary-600'*/}
+          {/*    target={'_blank'}*/}
+          {/*    href={locale === 'en' ? 'https://www.gotoai.world/' : 'https://www.gotoai.world/'}*/}
+          {/*  >{t('login.tos')}</Link>*/}
+          {/*  &nbsp;&&nbsp;*/}
+          {/*  <Link*/}
+          {/*    className='text-primary-600'*/}
+          {/*    target={'_blank'}*/}
+          {/*    href={locale === 'en' ? 'https://www.gotoai.world/' : 'https://www.gotoai.world/'}*/}
+          {/*  >{t('login.pp')}</Link>*/}
+          {/*</div>*/}
 
         </div>
       </div>
