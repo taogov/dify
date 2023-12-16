@@ -72,19 +72,19 @@ const LoginArea = () => {
         </div>
         <LoginPage></LoginPage>
         <div className={classNames(styles.footer)}>
-          <div className={styles.messgae}>专注于企业AI战略咨询,解决方案设计,大语言模型私有化部署,模型训练与微调,
+          <div className={styles.messgae}>企业AI战略咨询,解决方案设计,大语言模型私有化部署,模型训练与微调,
             AIGC 应用定制开发,AI教育培训, 核心技术骨干来自Microsoft , AWS, Google全球AI领域顶级厂商的技术咨询和服务团队
           </div>
           <div className={styles.chatCode} />
           <div className={styles.linkInfo}>
              即刻联系GotoAI开始试用，或者推荐商机，赢取佣金
-            <a href="www.gotoai.world" target='_blank' className={styles.link}>www.gotoai.world</a>
+            <a href="https://www.gotoai.world" target='_blank' className={styles.link}>www.gotoai.world</a>
                400-862-1600
           </div>
         </div>
       </div>
       <div className={styles.copyRight}>GotoAI 为深圳市云展信息技术有限公司AI解决方案品牌
-           Copyright ©2023 GotWeChatQRCode.jpgoAI World 深圳 | 广州 | 北京 | 武汉
+           Copyright ©2023 深圳 | 广州 | 北京 | 武汉
       </div>
     </div>
   )
@@ -97,18 +97,18 @@ const LoginMoible = () => {
       <LoginPage/>
       <div className={styles.moibleFooter}>
         <div className={styles.footerOneMoible}>
-          <div className={styles.chatCode} />
+          {/* <div className={styles.chatCode} /> */}
           <div className={styles.linkInfoMoible}>
              即刻联系GotoAI开始试用，或者推荐商机，赢取佣金
-            <a href="www.gotoai.world" target='_blank' className={styles.link}>www.gotoai.world</a>
+            <a href="https:/www.gotoai.world" target='_blank' className={styles.link}>www.gotoai.world</a>
                400-862-1600
           </div>
         </div>
-        <div className={styles.messgaeMoible}>专注于企业AI战略咨询,解决方案设计,大语言模型私有化部署,模型训练与微调,
+        <div className={styles.messgaeMoible}>企业AI战略咨询,解决方案设计,大语言模型私有化部署,模型训练与微调,
             AIGC 应用定制开发,AI教育培训, 核心技术骨干来自Microsoft , AWS, Google全球AI领域顶级厂商的技术咨询和服务团队
         </div>
         <div className={styles.copyRightMoible}>GotoAI 为深圳市云展信息技术有限公司AI解决方案品牌
-           Copyright ©2023 GotWeChatQRCode.jpgoAI World 深圳 | 广州 | 北京 | 武汉
+           Copyright ©2023 深圳 | 广州 | 北京 | 武汉
         </div>
       </div>
     </div>
