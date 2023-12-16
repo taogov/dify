@@ -106,7 +106,7 @@ const translation = {
   },
   stepThree: {
     creationTitle: '🎉 Knowledge created',
-    creationContent: 'We automatically named the Knowledge, you can moGotoAi it at any time',
+    creationContent: 'We automatically named the Knowledge, you can moGotoAI it at any time',
     label: 'Knowledge name',
     additionTitle: '🎉 Document uploaded',
     additionP1: 'The document has been uploaded to the Knowledge',

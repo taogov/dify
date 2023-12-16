@@ -16,7 +16,7 @@ const translation = {
     },
   },
   apps: {
-    title: 'Explore Apps by GotoAi',
+    title: 'Explore Apps by GotoAI',
     description: 'Use these template apps instantly or customize your own apps based on the templates.',
     allCategories: 'All Categories',
   },
@@ -37,7 +37,7 @@ const translation = {
     HR: 'HR',
   },
   universalChat: {
-    welcome: 'Start chat with GotoAi',
+    welcome: 'Start chat with GotoAI',
     welcomeDescribe: 'Your AI conversation companion for personalized assistance',
     model: 'Model',
     plugins: {

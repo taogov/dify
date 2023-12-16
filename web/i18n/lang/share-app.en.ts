@@ -15,7 +15,7 @@ const translation = {
     prompt: 'Prompt',
     privatePromptConfigTitle: 'Conversation settings',
     publicPromptConfigTitle: 'Initial Prompt',
-    configStatusDes: 'Before start, you can moGotoAi conversation settings',
+    configStatusDes: 'Before start, you can moGotoAI conversation settings',
     configDisabled:
       'Previous session settings have been used for this session.',
     startChat: 'Start Chat',
