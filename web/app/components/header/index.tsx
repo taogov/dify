@@ -67,7 +67,7 @@ const Header = () => {
         <div className='flex items-center'>
           <ExploreNav className={navClassName} />
           <AppNav />
-          {isCurrentWorkspaceManager && <DatasetNav />}
+          {isAdmin && <DatasetNav />}
         </div>
       )}
       <div className='flex items-center flex-shrink-0'>
