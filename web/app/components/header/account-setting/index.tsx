@@ -28,6 +28,7 @@ import { AtSign, XClose } from '@/app/components/base/icons/src/vender/line/gene
 import { CubeOutline } from '@/app/components/base/icons/src/vender/line/shapes'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
 import { useProviderContext } from '@/context/provider-context'
+import {useAppContext} from "@/context/app-context";
 
 const iconClassName = `
   w-4 h-4 ml-3 mr-2
@@ -56,11 +57,11 @@ export default function AccountSetting({
   const [activeMenu, setActiveMenu] = useState(activeTab)
   const { t } = useTranslation()
   const { enableBilling } = useProviderContext()
-
+  const { isCurrentWorkspaceManager } = useAppContext()
   const workplaceGroupItems = (() => {
     return [
       {
-        key: 'provider',
+        key: isCurrentWorkspaceManager ? 'provider' : false,
         name: t('common.settings.provider'),
         icon: <CubeOutline className={iconClassName} />,
         activeIcon: <CubeOutline className={iconClassName} />,
@@ -91,7 +92,7 @@ export default function AccountSetting({
         activeIcon: <PuzzlePiece01Solid className={iconClassName} />,
       },
       {
-        key: 'api-based-extension',
+        key: isCurrentWorkspaceManager ? 'api-based-extension' : false,
         name: t('common.settings.apiBasedExtension'),
         icon: <Webhooks className={iconClassName} />,
         activeIcon: <Webhooks className={iconClassName} />,

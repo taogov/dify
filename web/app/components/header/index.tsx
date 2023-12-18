@@ -24,7 +24,7 @@ const navClassName = `
 `
 
 const Header = () => {
-  const { isCurrentWorkspaceManager, langeniusVersionInfo } = useAppContext()
+  const { isCurrentWorkspaceManager, langeniusVersionInfo,isAdmin } = useAppContext()
   const [showUpgradePanel, setShowUpgradePanel] = useState(false)
   const upgradeBtnRef = useRef<HTMLElement>(null)
   useClickAway(() => {
@@ -93,7 +93,7 @@ const Header = () => {
         <div className='w-full flex flex-col p-2 gap-y-1'>
           <ExploreNav className={navClassName} />
           <AppNav />
-          {isCurrentWorkspaceManager && <DatasetNav />}
+          {isAdmin && <DatasetNav />}
         </div>
       )}
     </div>

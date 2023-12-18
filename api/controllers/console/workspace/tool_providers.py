@@ -53,7 +53,7 @@ class ToolProviderCredentialsApi(Resource):
             abort(404)
 
         # The role of the current user in the ta table must be admin or owner
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden(f'User {current_user.id} is not authorized to update provider token, '
                             f'current_role is {current_user.current_tenant.current_role}')
 

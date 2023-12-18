@@ -18,6 +18,7 @@ export type AppContextValue = {
   mutateUserProfile: VoidFunction
   currentWorkspace: ICurrentWorkspace
   isCurrentWorkspaceManager: boolean
+  isAdmin: boolean
   mutateCurrentWorkspace: VoidFunction
   pageContainerRef: React.RefObject<HTMLDivElement>
   langeniusVersionInfo: LangGeniusVersionResponse
@@ -57,6 +58,7 @@ const AppContext = createContext<AppContextValue>({
   },
   currentWorkspace: initialWorkspaceInfo,
   isCurrentWorkspaceManager: false,
+  isAdmin: false,
   mutateUserProfile: () => { },
   mutateCurrentWorkspace: () => { },
   pageContainerRef: createRef(),
@@ -83,7 +85,7 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
   const [langeniusVersionInfo, setLangeniusVersionInfo] = useState<LangGeniusVersionResponse>(initialLangeniusVersionInfo)
   const [currentWorkspace, setCurrentWorkspace] = useState<ICurrentWorkspace>(initialWorkspaceInfo)
   const isCurrentWorkspaceManager = useMemo(() => ['owner'].includes(currentWorkspace.role), [currentWorkspace.role])
-
+  const isAdmin = useMemo(() => ['owner', 'admin'].includes(currentWorkspace.role), [currentWorkspace.role])
   const updateUserProfileAndVersion = useCallback(async () => {
     if (userProfileResponse && !userProfileResponse.bodyUsed) {
       const result = await userProfileResponse.json()
@@ -118,6 +120,7 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
       useSelector,
       currentWorkspace,
       isCurrentWorkspaceManager,
+      isAdmin,
       mutateCurrentWorkspace,
     }}>
       <div className='flex flex-col h-full overflow-y-auto'>

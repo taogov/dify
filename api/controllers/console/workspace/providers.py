@@ -61,7 +61,7 @@ class ProviderTokenApi(Resource):
     @account_initialization_required
     def post(self, provider):
         # The role of the current user in the ta table must be admin or owner
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         parser = reqparse.RequestParser()

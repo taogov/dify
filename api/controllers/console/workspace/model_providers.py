@@ -70,7 +70,7 @@ class ModelProviderUpdateApi(Resource):
     @login_required
     @account_initialization_required
     def post(self, provider_name: str):
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         parser = reqparse.RequestParser()
@@ -94,7 +94,7 @@ class ModelProviderUpdateApi(Resource):
     @login_required
     @account_initialization_required
     def delete(self, provider_name: str):
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         provider_service = ProviderService()
@@ -149,7 +149,7 @@ class ModelProviderModelUpdateApi(Resource):
     @login_required
     @account_initialization_required
     def post(self, provider_name: str):
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         parser = reqparse.RequestParser()
@@ -178,7 +178,7 @@ class ModelProviderModelUpdateApi(Resource):
     @login_required
     @account_initialization_required
     def delete(self, provider_name: str):
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         parser = reqparse.RequestParser()
@@ -204,7 +204,7 @@ class PreferredProviderTypeUpdateApi(Resource):
     @login_required
     @account_initialization_required
     def post(self, provider_name: str):
-        if current_user.current_tenant.current_role not in ['admin', 'owner']:
+        if current_user.current_tenant.current_role not in ['owner']:
             raise Forbidden()
 
         parser = reqparse.RequestParser()
