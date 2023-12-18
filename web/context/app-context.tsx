@@ -82,7 +82,7 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
   const [userProfile, setUserProfile] = useState<UserProfileResponse>()
   const [langeniusVersionInfo, setLangeniusVersionInfo] = useState<LangGeniusVersionResponse>(initialLangeniusVersionInfo)
   const [currentWorkspace, setCurrentWorkspace] = useState<ICurrentWorkspace>(initialWorkspaceInfo)
-  const isCurrentWorkspaceManager = useMemo(() => ['owner', 'admin'].includes(currentWorkspace.role), [currentWorkspace.role])
+  const isCurrentWorkspaceManager = useMemo(() => ['owner'].includes(currentWorkspace.role), [currentWorkspace.role])
 
   const updateUserProfileAndVersion = useCallback(async () => {
     if (userProfileResponse && !userProfileResponse.bodyUsed) {
