@@ -133,3 +133,9 @@ export const audioToText = (url: string, isPublicAPI: boolean, body: FormData) =
 export const fetchAccessToken = async (body: any) => {
   return post('/passport', { body }) as Promise<{ access_token: string; test: string }>
 }
+
+export const fetchLogin = async (appCode: string) => {
+    const headers = new Headers()
+    headers.append('X-App-Code', appCode)
+    return get('/passport', { headers }) as Promise<{ access_token: string }>
+}

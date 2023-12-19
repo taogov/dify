@@ -127,6 +127,7 @@ def upgrade():
     sa.Column('api_rph', sa.Integer(), nullable=False),
     sa.Column('is_demo', sa.Boolean(), server_default=sa.text('false'), nullable=False),
     sa.Column('is_public', sa.Boolean(), server_default=sa.text('false'), nullable=False),
+    sa.Column('need_login', sa.Boolean(), server_default=sa.text('true'), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP(0)'), nullable=False),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP(0)'), nullable=False),
     sa.PrimaryKeyConstraint('id', name='app_pkey')
