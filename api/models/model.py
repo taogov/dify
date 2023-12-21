@@ -36,7 +36,7 @@ class App(db.Model):
     app_model_config_id = db.Column(UUID, nullable=True)
     status = db.Column(db.String(255), nullable=False, server_default=db.text("'normal'::character varying"))
     enable_site = db.Column(db.Boolean, nullable=False)
-    need_login = db.Column(db.Boolean, nullable=True)
+    need_login = db.Column(db.Boolean, nullable=True, server_default=db.text('true'))
     enable_api = db.Column(db.Boolean, nullable=False)
     api_rpm = db.Column(db.Integer, nullable=False)
     api_rph = db.Column(db.Integer, nullable=False)
