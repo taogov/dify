@@ -122,8 +122,8 @@ class BaseApiKeyResource(Resource):
 class AppApiKeyListResource(BaseApiKeyListResource):
 
     def after_request(self, resp):
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+#         resp.headers['`Access-Control-Allow-Origin`'] = '*'
+#         resp.headers['Access-Control-Allow-Credentials'] = 'true'
         return resp
 
     resource_type = 'app'
@@ -135,8 +135,8 @@ class AppApiKeyListResource(BaseApiKeyListResource):
 class AppApiKeyResource(BaseApiKeyResource):
 
     def after_request(self, resp):
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+#         resp.headers['Access-Control-Allow-Origin'] = '*'
+#         resp.headers['Access-Control-Allow-Credentials'] = 'true'
         return resp
 
     resource_type = 'app'
@@ -147,8 +147,8 @@ class AppApiKeyResource(BaseApiKeyResource):
 class DatasetApiKeyListResource(BaseApiKeyListResource):
 
     def after_request(self, resp):
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+#         resp.headers['Access-Control-Allow-Origin'] = '*'
+#         resp.headers['Access-Control-Allow-Credentials'] = 'true'
         return resp
 
     resource_type = 'dataset'
@@ -160,8 +160,8 @@ class DatasetApiKeyListResource(BaseApiKeyListResource):
 class DatasetApiKeyResource(BaseApiKeyResource):
 
     def after_request(self, resp):
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.headers['Access-Control-Allow-Credentials'] = 'true'
+#         resp.headers['Access-Control-Allow-Origin'] = '*'
+#         resp.headers['Access-Control-Allow-Credentials'] = 'true'
         return resp
     resource_type = 'dataset'
     resource_model = Dataset
